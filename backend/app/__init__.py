@@ -1,0 +1,1 @@
+"""Tanyara backend application package."""
