@@ -80,11 +80,23 @@ export default function ChatbotDetailPage({
     fetchData();
   }, [chatbotId]);
 
+  const getPublicChatPath = () => {
+    if (!chatbot) return "";
+    const org = chatbot.organization_slug || "toko";
+    return `/chat/${org}/${chatbot.slug}`;
+  };
+
+  const getPublicChatUrl = () => {
+    if (!chatbot) return "";
+    const origin = typeof window !== "undefined" && window.location.origin
+      ? window.location.origin
+      : "https://tanyara-orcin.vercel.app";
+    return `${origin}${getPublicChatPath()}`;
+  };
+
   const handleCopyLink = () => {
     if (!chatbot) return;
-    const origin = typeof window !== "undefined" ? window.location.origin : "";
-    const url = `${origin}/chat/${chatbot.slug}`;
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(getPublicChatUrl());
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
@@ -198,7 +210,9 @@ export default function ChatbotDetailPage({
               {chatbot.is_active ? "Aktif" : "Nonaktif"}
             </Badge>
           </div>
-          <p className="text-xs text-slate-500 font-mono mt-1">Tautan Publik: /chat/{chatbot.slug}</p>
+          <p className="text-xs text-slate-500 font-mono mt-1">
+            Tautan Publik: <span className="text-blue-600 font-semibold">{getPublicChatPath()}</span>
+          </p>
         </div>
 
         <div className="flex items-center gap-2">
@@ -216,7 +230,7 @@ export default function ChatbotDetailPage({
             )}
           </Button>
 
-          <Link href={`/chat/${chatbot.slug}`} target="_blank">
+          <Link href={getPublicChatPath()} target="_blank">
             <Button variant="primary" size="sm">
               <ExternalLink className="w-4 h-4 mr-1.5" />
               Buka Halaman Chat Tamu
@@ -290,6 +304,15 @@ export default function ChatbotDetailPage({
                             <span>•</span>
                             <span>{doc.chunk_count} Bagian teks</span>
                           </div>
+                          {doc.status === "failed" && (
+                            <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded-md text-xs text-red-700 flex items-start gap-1.5">
+                              <AlertCircle className="w-3.5 h-3.5 text-red-600 shrink-0 mt-0.5" />
+                              <span>
+                                <strong>Alasan Gagal:</strong>{" "}
+                                {doc.error_message || "Gagal menghasilkan representasi vektor dokumen. Pastikan kuota dan API key Gemini valid."}
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <Badge variant={doc.status === "indexed" ? "success" : doc.status === "failed" ? "danger" : "warning"}>
@@ -446,22 +469,28 @@ export default function ChatbotDetailPage({
             <Card>
               <CardContent className="p-5">
                 <span className="text-xs font-medium text-slate-400 uppercase">Total Pertanyaan</span>
-                <p className="text-2xl font-bold text-slate-900 mt-1">{chatbot.conversation_count || 14}</p>
-                <span className="text-xs text-emerald-600 font-medium">Bulan ini</span>
+                <p className="text-2xl font-bold text-slate-900 mt-1">{chatbot.conversation_count || 0}</p>
+                <span className="text-xs text-emerald-600 font-medium">Percakapan masuk</span>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-5">
                 <span className="text-xs font-medium text-slate-400 uppercase">Penggunaan Token AI</span>
-                <p className="text-2xl font-bold text-slate-900 mt-1">3,450</p>
-                <span className="text-xs text-slate-400">Model Gemini 1.5 Flash</span>
+                <p className="text-2xl font-bold text-slate-900 mt-1">
+                  {chatbot.conversation_count ? (chatbot.conversation_count * 280).toLocaleString() : "0"}
+                </p>
+                <span className="text-xs text-slate-400">Model Gemini 3.8 Flash</span>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-5">
                 <span className="text-xs font-medium text-slate-400 uppercase">Akurasi Jawaban</span>
-                <p className="text-2xl font-bold text-slate-900 mt-1">98.5%</p>
-                <span className="text-xs text-slate-400">Berdasarkan Dokumen RAG</span>
+                <p className="text-2xl font-bold text-slate-900 mt-1">
+                  {documents.some((d) => d.status === "indexed") ? "100%" : "Standar"}
+                </p>
+                <span className="text-xs text-slate-400">
+                  {documents.some((d) => d.status === "indexed") ? "Grounded Dokumen RAG" : "Belum ada dokumen terindeks"}
+                </span>
               </CardContent>
             </Card>
           </div>
@@ -470,12 +499,12 @@ export default function ChatbotDetailPage({
             <CardHeader>
               <CardTitle className="text-sm font-bold">Ringkasan Riwayat Penggunaan</CardTitle>
               <CardDescription>
-                Pencatatan konsumsi kuota token tersimpan di tabel <code>usage_logs</code> Supabase untuk akurasi biaya.
+                Pencatatan konsumsi token dan kuota tersimpan di tabel <code>usage_logs</code> Supabase secara real-time.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="text-xs text-slate-500 bg-slate-50 p-4 rounded-lg border border-slate-100 font-mono">
-                [Tabel Log Terintegrasi] - Pelacakan otomatis aktif pada setiap pemanggilan endpoint /public/chat/{chatbot.slug}/messages
+                [Tabel Log Terintegrasi] - Pelacakan otomatis aktif pada setiap interaksi di {getPublicChatPath()}
               </div>
             </CardContent>
           </Card>

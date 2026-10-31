@@ -67,14 +67,23 @@ export const api = {
       body: JSON.stringify(data),
     }, true),
 
-  // Public Chat (Unauthenticated)
-  getPublicChatbot: (slug: string) =>
-    fetchJson<ChatbotPublic>(`/api/v1/public/chatbots/${slug}`),
-  sendMessage: (slug: string, message: string, conversation_id?: string) =>
-    fetchJson<ChatMessage>(`/api/v1/public/chat/${slug}/messages`, {
-      method: "POST",
-      body: JSON.stringify({ message, conversation_id }),
-    }),
+  // Public Chat (Unauthenticated) - Supports /chat/[nama-toko]/[namachatbot]
+  getPublicChatbot: (slug: string, orgSlug?: string) =>
+    fetchJson<ChatbotPublic>(
+      orgSlug
+        ? `/api/v1/public/chatbots/${orgSlug}/${slug}`
+        : `/api/v1/public/chatbots/${slug}`
+    ),
+  sendMessage: (slug: string, message: string, conversation_id?: string, orgSlug?: string) =>
+    fetchJson<ChatMessage>(
+      orgSlug
+        ? `/api/v1/public/chat/${orgSlug}/${slug}/messages`
+        : `/api/v1/public/chat/${slug}/messages`,
+      {
+        method: "POST",
+        body: JSON.stringify({ message, conversation_id }),
+      }
+    ),
 
   // Documents
   listDocuments: (chatbotId: string) =>

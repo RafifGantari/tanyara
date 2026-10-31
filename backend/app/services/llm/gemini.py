@@ -7,7 +7,7 @@ from backend.app.core.config import settings
 logger = logging.getLogger(__name__)
 
 # Standard embedding model and expected dimensions
-EMBEDDING_MODEL_NAME = "models/text-embedding-004"
+EMBEDDING_MODEL_NAME = "models/gemini-embedding-001"
 EMBEDDING_DIMENSION = 768
 
 
@@ -131,9 +131,10 @@ class GeminiProvider(LLMProvider):
     async def generate_embeddings(
         self,
         texts: List[str],
+        task_type: str = "retrieval_document",
     ) -> List[List[float]]:
         """
-        Generates 768-dimension vector embeddings using models/text-embedding-004.
+        Generates 768-dimension vector embeddings using Gemini embedding models.
         """
         if not self._is_configured:
             raise RuntimeError(
@@ -147,34 +148,54 @@ class GeminiProvider(LLMProvider):
         from google.api_core.exceptions import GoogleAPIError
 
         results: List[List[float]] = []
+        candidate_models = [
+            self.embedding_model_name,
+            "models/gemini-embedding-001",
+            "models/gemini-embedding-2",
+            "models/text-embedding-004",
+        ]
+        # Preserve order while deduplicating
+        candidate_models = list(dict.fromkeys(candidate_models))
 
         for text in texts:
             clean_text = text.strip()
             if not clean_text:
                 continue
 
-            try:
-                response = genai.embed_content(
-                    model=self.embedding_model_name,
-                    content=clean_text,
-                    task_type="retrieval_document"
-                )
+            emb = None
+            last_err = None
+            for model in candidate_models:
+                try:
+                    kwargs = {
+                        "model": model,
+                        "content": clean_text,
+                        "task_type": task_type,
+                    }
+                    if "gemini-embedding" in model:
+                        kwargs["output_dimensionality"] = EMBEDDING_DIMENSION
 
-                raw_emb = response.get("embedding", [])
-                if isinstance(raw_emb, dict) and "values" in raw_emb:
-                    emb = raw_emb["values"]
-                else:
-                    emb = raw_emb
+                    response = genai.embed_content(**kwargs)
+                    raw_emb = response.get("embedding", [])
+                    if isinstance(raw_emb, dict) and "values" in raw_emb:
+                        val = raw_emb["values"]
+                    else:
+                        val = raw_emb
 
-                if len(emb) != EMBEDDING_DIMENSION:
-                    logger.warning(
-                        f"Embedding dimension mismatch: expected {EMBEDDING_DIMENSION}, got {len(emb)}"
-                    )
+                    if val and len(val) == EMBEDDING_DIMENSION:
+                        emb = val
+                        break
+                    elif val and len(val) > EMBEDDING_DIMENSION:
+                        emb = val[:EMBEDDING_DIMENSION]
+                        break
+                except Exception as e:
+                    last_err = e
+                    continue
 
+            if emb:
                 results.append(emb)
-
-            except GoogleAPIError as e:
-                logger.error(f"Gemini embedding error: {type(e).__name__}")
-                raise RuntimeError("Gagal menghasilkan representasi vektor dokumen.")
+            else:
+                err_detail = f"{type(last_err).__name__}: {last_err}" if last_err else "Semua model embedding gagal."
+                logger.error(f"Gemini embedding error: {err_detail}")
+                raise RuntimeError(f"Gagal menghasilkan representasi vektor: {err_detail}")
 
         return results

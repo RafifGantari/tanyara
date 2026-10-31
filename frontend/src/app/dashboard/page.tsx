@@ -40,9 +40,12 @@ export default function DashboardPage() {
     loadData();
   }, []);
 
-  const handleCopyLink = (slug: string) => {
-    const origin = typeof window !== "undefined" ? window.location.origin : "";
-    const url = `${origin}/chat/${slug}`;
+  const handleCopyLink = (slug: string, orgSlug?: string) => {
+    const origin = typeof window !== "undefined" && window.location.origin
+      ? window.location.origin
+      : "https://tanyara-orcin.vercel.app";
+    const store = orgSlug || "toko";
+    const url = `${origin}/chat/${store}/${slug}`;
     navigator.clipboard.writeText(url);
     setCopiedSlug(slug);
     setTimeout(() => setCopiedSlug(null), 2500);
@@ -165,7 +168,9 @@ export default function DashboardPage() {
                       </div>
                       <div>
                         <CardTitle className="text-base leading-snug">{bot.name}</CardTitle>
-                        <span className="text-xs text-slate-400 font-mono">/chat/{bot.slug}</span>
+                        <span className="text-xs text-blue-600 font-mono">
+                          /chat/{bot.organization_slug || "toko"}/{bot.slug}
+                        </span>
                       </div>
                     </div>
                     <Badge variant={bot.is_active ? "success" : "neutral"}>
@@ -194,7 +199,7 @@ export default function DashboardPage() {
 
                 <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-2">
                   <button
-                    onClick={() => handleCopyLink(bot.slug)}
+                    onClick={() => handleCopyLink(bot.slug, bot.organization_slug || undefined)}
                     className="inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-blue-600 font-medium py-1 px-2 rounded hover:bg-white transition-colors"
                     title="Salin Tautan Publik"
                   >
@@ -213,7 +218,7 @@ export default function DashboardPage() {
 
                   <div className="flex items-center gap-2">
                     <Link
-                      href={`/chat/${bot.slug}`}
+                      href={`/chat/${bot.organization_slug || "toko"}/${bot.slug}`}
                       target="_blank"
                       className="inline-flex items-center gap-1 text-xs text-slate-600 hover:text-slate-900 py-1 px-2 rounded hover:bg-white"
                       title="Buka Halaman Chat Publik"

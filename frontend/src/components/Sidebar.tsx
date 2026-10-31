@@ -91,23 +91,6 @@ export function Sidebar() {
             </Link>
           );
         })}
-
-        <div className="pt-6">
-          <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 px-3 py-2">
-            Demo Publik
-          </div>
-          <Link
-            href="/chat/kedai-kopi-nusantara"
-            target="_blank"
-            className="flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors"
-          >
-            <div className="flex items-center gap-3">
-              <Bot className="w-4 h-4 text-emerald-600" />
-              <span>Halaman Chat Tamu</span>
-            </div>
-            <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-          </Link>
-        </div>
       </nav>
 
       <div className="p-4 border-t border-slate-100 space-y-2">

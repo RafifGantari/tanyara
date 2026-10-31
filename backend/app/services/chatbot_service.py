@@ -11,14 +11,16 @@ _DEV_CHATBOTS = [
     {
         "id": "cb-demo-001",
         "organization_id": "org-demo-001",
-        "name": "Asisten Kedai Kopi Nusantara",
-        "slug": "kedai-kopi-nusantara",
-        "description": "Asisten virtual untuk info menu, jam buka, dan pemesanan meja kopi lokal nusantara.",
-        "welcome_message": "Selamat datang di Kedai Kopi Nusantara! Ada yang bisa kami bantu seputar menu biji kopi pilihan atau reservasi?",
-        "system_prompt": "Anda adalah asisten ramah Kedai Kopi Nusantara. Jawab pertanyaan seputar menu, harga, dan lokasi berdasarkan informasi toko.",
+        "organization_slug": "toko-demo",
+        "organization_name": "Toko Demo",
+        "name": "Asisten CS Toko",
+        "slug": "cs-toko",
+        "description": "Asisten virtual untuk info produk, layanan, dan bantuan pelanggan.",
+        "welcome_message": "Halo! Ada yang bisa kami bantu seputar produk atau pesanan Anda?",
+        "system_prompt": "Anda adalah asisten AI toko yang ramah dan profesional. Jawab pertanyaan seputar produk dan informasi toko secara akurat.",
         "is_active": True,
-        "document_count": 2,
-        "conversation_count": 14,
+        "document_count": 0,
+        "conversation_count": 0,
         "created_at": datetime.now(timezone.utc),
         "updated_at": datetime.now(timezone.utc)
     }
@@ -34,16 +36,19 @@ class ChatbotService:
         client = get_supabase_client()
         if client:
             try:
-                query = client.table("chatbots").select("*, documents(count), conversations(count)")
+                query = client.table("chatbots").select("*, organizations(name, slug), documents(count), conversations(count)")
                 if organization_id:
                     query = query.eq("organization_id", organization_id)
                 res = query.execute()
                 if res.data and len(res.data) > 0:
                     items = []
                     for row in res.data:
+                        org_info = row.get("organizations") or {}
                         items.append(ChatbotResponse(
                             id=row["id"],
                             organization_id=row["organization_id"],
+                            organization_slug=org_info.get("slug"),
+                            organization_name=org_info.get("name"),
                             name=row["name"],
                             slug=row["slug"],
                             description=row.get("description"),
@@ -67,12 +72,15 @@ class ChatbotService:
         client = get_supabase_client()
         if client:
             try:
-                res = client.table("chatbots").select("*, documents(count), conversations(count)").eq("id", chatbot_id).limit(1).execute()
+                res = client.table("chatbots").select("*, organizations(name, slug), documents(count), conversations(count)").eq("id", chatbot_id).limit(1).execute()
                 if res.data and len(res.data) > 0:
                     row = res.data[0]
+                    org_info = row.get("organizations") or {}
                     return ChatbotResponse(
                         id=row["id"],
                         organization_id=row["organization_id"],
+                        organization_slug=org_info.get("slug"),
+                        organization_name=org_info.get("name"),
                         name=row["name"],
                         slug=row["slug"],
                         description=row.get("description"),
@@ -92,14 +100,47 @@ class ChatbotService:
                 return ChatbotResponse(**cb)
         return None
 
-    async def get_public_chatbot_by_slug(self, slug: str) -> Optional[ChatbotPublicResponse]:
-        """Get safe public chatbot information by unique slug for visitors."""
+    async def get_public_chatbot_by_slug(self, slug: str, org_slug: Optional[str] = None) -> Optional[ChatbotPublicResponse]:
+        """Get safe public chatbot information by unique slug and optional org slug for visitors."""
         client = get_supabase_client()
         if client:
             try:
-                res = client.table("chatbots").select("id, name, description, welcome_message, slug, is_active").eq("slug", slug).eq("is_active", True).limit(1).execute()
+                # 1. If org_slug is provided, try scoped lookup
+                if org_slug:
+                    res = client.table("chatbots").select(
+                        "id, name, description, welcome_message, slug, is_active, organizations!inner(name, slug)"
+                    ).eq("slug", slug).eq("organizations.slug", org_slug).eq("is_active", True).limit(1).execute()
+                    if res.data and len(res.data) > 0:
+                        row = res.data[0]
+                        org_info = row.get("organizations") or {}
+                        return ChatbotPublicResponse(
+                            id=row["id"],
+                            name=row["name"],
+                            description=row.get("description"),
+                            welcome_message=row["welcome_message"],
+                            slug=row["slug"],
+                            organization_slug=org_info.get("slug"),
+                            organization_name=org_info.get("name"),
+                            is_active=row["is_active"]
+                        )
+
+                # 2. Lookup by chatbot slug
+                res = client.table("chatbots").select(
+                    "id, name, description, welcome_message, slug, is_active, organizations(name, slug)"
+                ).eq("slug", slug).eq("is_active", True).limit(1).execute()
                 if res.data and len(res.data) > 0:
-                    return ChatbotPublicResponse(**res.data[0])
+                    row = res.data[0]
+                    org_info = row.get("organizations") or {}
+                    return ChatbotPublicResponse(
+                        id=row["id"],
+                        name=row["name"],
+                        description=row.get("description"),
+                        welcome_message=row["welcome_message"],
+                        slug=row["slug"],
+                        organization_slug=org_info.get("slug"),
+                        organization_name=org_info.get("name"),
+                        is_active=row["is_active"]
+                    )
             except Exception as e:
                 logger.warning(f"Error fetching public chatbot {slug} from Supabase: {e}")
 
@@ -111,6 +152,8 @@ class ChatbotService:
                     description=cb["description"],
                     welcome_message=cb["welcome_message"],
                     slug=cb["slug"],
+                    organization_slug=cb.get("organization_slug", "toko-demo"),
+                    organization_name=cb.get("organization_name", "Toko Demo"),
                     is_active=cb["is_active"]
                 )
         return None

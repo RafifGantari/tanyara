@@ -1,6 +1,8 @@
 export interface Chatbot {
   id: string;
   organization_id: string;
+  organization_slug?: string | null;
+  organization_name?: string | null;
   name: string;
   slug: string;
   description?: string | null;
@@ -19,6 +21,8 @@ export interface ChatbotPublic {
   description?: string | null;
   welcome_message: string;
   slug: string;
+  organization_slug?: string | null;
+  organization_name?: string | null;
   is_active: boolean;
 }
 

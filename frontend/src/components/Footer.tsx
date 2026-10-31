@@ -24,7 +24,7 @@ export function Footer() {
             <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 mb-3">Produk</h4>
             <ul className="space-y-2 text-sm text-slate-600">
               <li><Link href="/dashboard" className="hover:text-slate-900">Dashboard Pemilik</Link></li>
-              <li><Link href="/chat/kedai-kopi-nusantara" className="hover:text-slate-900">Demo Chatbot Publik</Link></li>
+              <li><Link href="/register" className="hover:text-slate-900">Pendaftaran Bisnis</Link></li>
               <li><span className="text-slate-400">Integrasi WhatsApp (Segera)</span></li>
             </ul>
           </div>

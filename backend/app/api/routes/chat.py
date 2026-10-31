@@ -14,15 +14,20 @@ router = APIRouter(tags=["Public Chat"])
     response_model=ChatMessageResponse,
     summary="Send message to public chatbot"
 )
-async def send_chat_message(slug: str, request: ChatMessageRequest):
+@router.post(
+    "/public/chat/{org_slug}/{slug}/messages",
+    response_model=ChatMessageResponse,
+    summary="Send message to public chatbot by store and bot slug"
+)
+async def send_chat_message(slug: str, request: ChatMessageRequest, org_slug: str = None):
     """
-    Public customer interaction endpoint for /chat/{slug}.
+    Public customer interaction endpoint for /chat/[nama-toko]/[namachatbot].
     No authentication required for visitors.
     Validates active chatbot status, retrieves grounded context from RAG,
     and returns verified AI response without exposing internal secrets.
     """
-    # 1. Look up public chatbot by slug
-    pub_bot = await chatbot_service.get_public_chatbot_by_slug(slug)
+    # 1. Look up public chatbot by slug and org_slug
+    pub_bot = await chatbot_service.get_public_chatbot_by_slug(slug, org_slug=org_slug)
     if not pub_bot or not pub_bot.is_active:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

@@ -112,7 +112,7 @@ export default function RegisterPage() {
                 label="Nama Bisnis / UMKM"
                 type="text"
                 required
-                placeholder="Contoh: Kedai Kopi Nusantara"
+                placeholder="Contoh: Toko Berkah Mandiri"
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
               />
@@ -121,7 +121,7 @@ export default function RegisterPage() {
                 label="Alamat Email Pemilik"
                 type="email"
                 required
-                placeholder="pemilik@kedaikopi.com"
+                placeholder="pemilik@tokoberkah.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />

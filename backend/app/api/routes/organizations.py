@@ -11,8 +11,8 @@ router = APIRouter(tags=["Organizations"])
 _DEV_ORGS = [
     {
         "id": "org-demo-001",
-        "name": "Kedai Kopi Nusantara",
-        "slug": "kedai-kopi-nusantara",
+        "name": "Bisnis Toko Demo",
+        "slug": "bisnis-toko-demo",
         "plan": "free",
         "role": "owner",
         "created_at": datetime.now(timezone.utc),

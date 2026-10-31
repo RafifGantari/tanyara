@@ -65,13 +65,14 @@ async def update_chatbot(
 
 
 @router.get("/public/chatbots/{slug}", response_model=ChatbotPublicResponse, summary="Public chatbot profile for visitors")
-async def get_public_chatbot(slug: str):
+@router.get("/public/chatbots/{org_slug}/{slug}", response_model=ChatbotPublicResponse, summary="Public chatbot profile by store and bot slug")
+async def get_public_chatbot(slug: str, org_slug: str = None):
     """
-    Publicly accessible endpoint for customers chatting via /chat/{slug}.
-    Exposes only safe non-sensitive metadata (name, welcome message, status).
+    Publicly accessible endpoint for customers chatting via /chat/[nama-toko]/[namachatbot].
+    Exposes only safe non-sensitive metadata (name, welcome message, status, organization).
     Never exposes internal system_prompt or organization_id.
     """
-    cb = await chatbot_service.get_public_chatbot_by_slug(slug)
+    cb = await chatbot_service.get_public_chatbot_by_slug(slug, org_slug=org_slug)
     if not cb or not cb.is_active:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

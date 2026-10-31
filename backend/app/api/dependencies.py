@@ -35,7 +35,7 @@ async def get_current_user(
         # Development fallback user
         return AuthUser(
             user_id="user-dev-local-001",
-            email="owner@umkm-nusantara.id",
+            email="owner@bisnis-tanyara.id",
             role="authenticated",
             raw_claims={"app_metadata": {"org_id": "org-demo-001"}},
             is_dev_fallback=True,

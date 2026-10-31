@@ -21,7 +21,7 @@ class ChatbotBase(BaseModel):
 
 
 class ChatbotCreate(ChatbotBase):
-    slug: str = Field(..., min_length=3, max_length=50, description="Unique URL slug (e.g. kedai-kopi-nusantara)")
+    slug: str = Field(..., min_length=3, max_length=50, description="Unique URL slug (e.g. asisten-toko)")
     organization_id: Optional[str] = Field(None, description="Target organization ID")
 
     @field_validator("slug")
@@ -43,6 +43,8 @@ class ChatbotUpdate(BaseModel):
 class ChatbotResponse(ChatbotBase):
     id: str
     organization_id: str
+    organization_slug: Optional[str] = None
+    organization_name: Optional[str] = None
     slug: str
     document_count: int = Field(default=0, description="Total documents attached")
     conversation_count: int = Field(default=0, description="Total customer conversations")
@@ -53,12 +55,14 @@ class ChatbotResponse(ChatbotBase):
 
 
 class ChatbotPublicResponse(BaseModel):
-    """Safe schema for unauthenticated public visitors accessing /chat/{slug}."""
+    """Safe schema for unauthenticated public visitors accessing /chat/[nama-toko]/[namachatbot]."""
     id: str
     name: str
     description: Optional[str] = None
     welcome_message: str
     slug: str
+    organization_slug: Optional[str] = None
+    organization_name: Optional[str] = None
     is_active: bool
 
     model_config = ConfigDict(from_attributes=True)

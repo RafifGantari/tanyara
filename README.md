@@ -2,7 +2,7 @@
 
 > **Ubah Dokumen Menjadi Asisten AI untuk Bisnis Anda.**
 
-Tanyara adalah platform SaaS AI Chatbot multi-tenant yang dirancang khusus untuk pelaku bisnis, UMKM, dan organisasi di Indonesia. Platform ini memungkinkan pemilik usaha mengunggah dokumen pengetahuan bisnis (seperti katalog menu, SOP layanan, daftar harga, dan dokumen FAQ), membuat chatbot asisten virtual pintar, dan mempublikasikannya ke pelanggan umum melalui tautan web publik unik (contoh: `/chat/kedai-kopi-nusantara`).
+Tanyara adalah platform SaaS AI Chatbot multi-tenant yang dirancang khusus untuk pelaku bisnis, UMKM, dan organisasi di Indonesia. Platform ini memungkinkan pemilik usaha mengunggah dokumen pengetahuan bisnis (seperti katalog menu, SOP layanan, daftar harga, dan dokumen FAQ), membuat chatbot asisten virtual pintar, dan mempublikasikannya ke pelanggan umum melalui tautan web publik unik (contoh: `https://tanyara-orcin.vercel.app/chat/[nama-toko]/[namachatbot]`).
 
 Pelanggan dan tamu dapat langsung mengakses dan berkonsultasi dengan chatbot tanpa perlu membuat akun atau mendaftar di Tanyara.
 
@@ -152,7 +152,7 @@ Sebelum menjalankan proyek, pastikan sistem Anda telah terpasang:
    - **Owner Dashboard**: [http://localhost:3000/dashboard](http://localhost:3000/dashboard)
    - **Buat Chatbot Baru**: [http://localhost:3000/dashboard/chatbots/new](http://localhost:3000/dashboard/chatbots/new)
    - **Detail Chatbot Demo**: [http://localhost:3000/dashboard/chatbots/cb-demo-001](http://localhost:3000/dashboard/chatbots/cb-demo-001)
-   - **Halaman Tamu Publik**: [http://localhost:3000/chat/kedai-kopi-nusantara](http://localhost:3000/chat/kedai-kopi-nusantara)
+   - **Halaman Tamu Publik**: [http://localhost:3000/chat/toko-demo/cs-toko](http://localhost:3000/chat/toko-demo/cs-toko)
 
 ---
 

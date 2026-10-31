@@ -52,10 +52,9 @@ export default function LandingPage() {
                     <ArrowRight className="w-4 h-4 ml-1" />
                   </Button>
                 </Link>
-                <Link href="/chat/kedai-kopi-nusantara" target="_blank" className="w-full sm:w-auto">
+                <Link href="/login" className="w-full sm:w-auto">
                   <Button variant="outline" size="lg" className="w-full">
-                    <Bot className="w-4 h-4 mr-1 text-blue-600" />
-                    Coba Demo Publik Tamu
+                    Masuk ke Dashboard
                   </Button>
                 </Link>
               </div>
@@ -84,7 +83,7 @@ export default function LandingPage() {
                     <div className="w-3 h-3 rounded-full bg-rose-400" />
                     <div className="w-3 h-3 rounded-full bg-amber-400" />
                     <div className="w-3 h-3 rounded-full bg-emerald-400" />
-                    <span className="ml-2 text-xs font-mono text-slate-500">tanyara.id/chat/kedai-kopi-nusantara</span>
+                    <span className="ml-2 text-xs font-mono text-slate-500">tanyara-orcin.vercel.app/chat/toko-anda/asisten</span>
                   </div>
                   <Badge variant="success">Chatbot Aktif</Badge>
                 </div>
@@ -94,12 +93,12 @@ export default function LandingPage() {
                       AI
                     </div>
                     <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 text-sm text-slate-800 shadow-sm max-w-md">
-                      Selamat datang di Kedai Kopi Nusantara! Ada yang bisa kami bantu seputar menu biji kopi pilihan atau reservasi hari ini?
+                      Halo! Selamat datang di Toko Kami. Ada yang bisa saya bantu seputar produk atau pesanan Anda hari ini?
                     </div>
                   </div>
                   <div className="flex items-start gap-3 justify-end">
                     <div className="bg-blue-600 text-white rounded-2xl rounded-tr-sm p-4 text-sm shadow-sm max-w-md">
-                      Apakah ada pilihan kopi manual brew dengan biji kopi Aceh Gayo?
+                      Apakah produk toko Anda bisa dikirim ke luar kota?
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -107,7 +106,7 @@ export default function LandingPage() {
                       AI
                     </div>
                     <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 text-sm text-slate-800 shadow-sm max-w-md">
-                      Tentu! Menurut menu kami, tersedia <strong>Single Origin Aceh Gayo</strong> dengan metode V60 atau Aeropress seharga Rp28.000, dengan profil rasa citrus dan earthy yang seimbang.
+                      Tentu! Sesuai dokumen kebijakan toko kami, pengiriman tersedia ke seluruh wilayah Indonesia melalui ekspedisi reguler dan kilat dengan garansi packing aman.
                     </div>
                   </div>
                 </div>
