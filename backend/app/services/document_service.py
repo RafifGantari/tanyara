@@ -311,5 +311,24 @@ class DocumentService:
         _DEV_DOCUMENTS.append(doc_result)
         return DocumentResponse(**doc_result)
 
+    async def delete_document(self, chatbot_id: str, document_id: str) -> bool:
+        """Deletes a document and its associated vector chunks."""
+        client = get_supabase_client()
+        if client:
+            try:
+                # 1. Delete associated chunks
+                client.table("document_chunks").delete().eq("document_id", document_id).execute()
+                # 2. Delete document record
+                res = client.table("documents").delete().eq("id", document_id).eq("chatbot_id", chatbot_id).execute()
+                return True
+            except Exception as e:
+                logger.error(f"Error deleting document {document_id}: {e}")
+                return False
+
+        # Offline fallback
+        global _DEV_DOCUMENTS
+        _DEV_DOCUMENTS = [d for d in _DEV_DOCUMENTS if d["id"] != document_id]
+        return True
+
 
 document_service = DocumentService()

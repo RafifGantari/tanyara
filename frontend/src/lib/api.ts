@@ -89,8 +89,18 @@ export const api = {
   listDocuments: (chatbotId: string) =>
     fetchJson<DocumentItem[]>(`/api/v1/chatbots/${chatbotId}/documents`, {}, true),
 
+  deleteDocument: (chatbotId: string, documentId: string, organizationId?: string) =>
+    fetchJson<{ success: boolean; message: string }>(
+      `/api/v1/chatbots/${chatbotId}/documents/${documentId}`,
+      {
+        method: "DELETE",
+        headers: organizationId ? { "X-Organization-Id": organizationId } : {},
+      },
+      true
+    ),
+
   // Direct Document File Upload (FormData)
-  uploadDocumentFile: async (chatbotId: string, file: File): Promise<DocumentItem> => {
+  uploadDocumentFile: async (chatbotId: string, file: File, organizationId?: string): Promise<DocumentItem> => {
     const url = `${API_BASE_URL}/api/v1/chatbots/${chatbotId}/documents/upload`;
     const formData = new FormData();
     formData.append("file", file);
@@ -99,6 +109,9 @@ export const api = {
     const token = await getAccessToken();
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
+    }
+    if (organizationId) {
+      headers["X-Organization-Id"] = organizationId;
     }
 
     const res = await fetch(url, {

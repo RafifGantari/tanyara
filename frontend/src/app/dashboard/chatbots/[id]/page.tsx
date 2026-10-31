@@ -16,6 +16,7 @@ import {
   AlertCircle,
   Clock,
   CheckCircle2,
+  Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -44,6 +45,7 @@ export default function ChatbotDetailPage({
   const [uploadLoading, setUploadLoading] = useState(false);
   const [uploadMessage, setUploadMessage] = useState<string | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [deletingDocId, setDeletingDocId] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Playground test chat states
@@ -121,7 +123,7 @@ export default function ChatbotDetailPage({
     setUploadError(null);
 
     try {
-      const newDoc = await api.uploadDocumentFile(chatbotId, selectedFile);
+      const newDoc = await api.uploadDocumentFile(chatbotId, selectedFile, chatbot?.organization_id);
       setDocuments((prev) => [newDoc, ...prev]);
       setSelectedFile(null);
       if (fileInputRef.current) {
@@ -135,6 +137,21 @@ export default function ChatbotDetailPage({
       setUploadError(err.message || "Gagal mengunggah dan memproses dokumen.");
     } finally {
       setUploadLoading(false);
+    }
+  };
+
+  const handleDeleteDocument = async (docId: string, docName: string) => {
+    if (!confirm(`Apakah Anda yakin ingin menghapus berkas "${docName}"?`)) {
+      return;
+    }
+    setDeletingDocId(docId);
+    try {
+      await api.deleteDocument(chatbotId, docId, chatbot?.organization_id);
+      setDocuments((prev) => prev.filter((d) => d.id !== docId));
+    } catch (err: any) {
+      alert(err.message || "Gagal menghapus dokumen.");
+    } finally {
+      setDeletingDocId(null);
     }
   };
 
@@ -292,13 +309,13 @@ export default function ChatbotDetailPage({
               <div className="space-y-3">
                 {documents.map((doc) => (
                   <Card key={doc.id}>
-                    <CardContent className="p-4 flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs uppercase">
+                    <CardContent className="p-4 flex items-center justify-between gap-4">
+                      <div className="flex items-start gap-3 flex-1 min-w-0">
+                        <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs uppercase shrink-0 mt-0.5">
                           {doc.name.split(".").pop() || "DOC"}
                         </div>
-                        <div>
-                          <p className="text-sm font-semibold text-slate-900">{doc.name}</p>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-slate-900 truncate">{doc.name}</p>
                           <div className="flex items-center gap-2 text-xs text-slate-400 mt-0.5">
                             <span>{formatBytes(doc.file_size_bytes || 0)}</span>
                             <span>•</span>
@@ -315,9 +332,19 @@ export default function ChatbotDetailPage({
                           )}
                         </div>
                       </div>
-                      <Badge variant={doc.status === "indexed" ? "success" : doc.status === "failed" ? "danger" : "warning"}>
-                        {doc.status === "indexed" ? "Terindeks RAG" : doc.status === "failed" ? "Gagal" : "Sedang Diproses"}
-                      </Badge>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <Badge variant={doc.status === "indexed" ? "success" : doc.status === "failed" ? "danger" : "warning"}>
+                          {doc.status === "indexed" ? "Terindeks RAG" : doc.status === "failed" ? "Gagal" : "Sedang Diproses"}
+                        </Badge>
+                        <button
+                          onClick={() => handleDeleteDocument(doc.id, doc.name)}
+                          disabled={deletingDocId === doc.id}
+                          className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors disabled:opacity-50"
+                          title="Hapus Dokumen"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </CardContent>
                   </Card>
                 ))}
