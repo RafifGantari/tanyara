@@ -37,6 +37,11 @@ async function fetchJson<T>(
     return await res.json();
   } catch (err: any) {
     console.warn(`API call failed for ${endpoint}:`, err.message);
+    if (err.message === "Failed to fetch" || (err.name === "TypeError" && !err.message.includes("status"))) {
+      throw new Error(
+        "Gagal terhubung ke backend API (Failed to fetch). Pastikan server backend sedang aktif (di http://localhost:8000 untuk lokal, atau periksa NEXT_PUBLIC_API_BASE_URL dan CORS jika di cloud)."
+      );
+    }
     throw err;
   }
 }
