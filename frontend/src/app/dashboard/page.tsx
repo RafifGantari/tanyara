@@ -79,7 +79,7 @@ export default function DashboardPage() {
               <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Chatbot</p>
               <p className="text-2xl font-bold text-slate-900 mt-1">{chatbots.length}</p>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center">
               <Bot className="w-5 h-5" />
             </div>
           </CardContent>
@@ -163,12 +163,12 @@ export default function DashboardPage() {
                 <CardHeader className="pb-4">
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">
+                      <div className="w-9 h-9 rounded-lg bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-sm">
                         <Bot className="w-5 h-5" />
                       </div>
                       <div>
                         <CardTitle className="text-base leading-snug">{bot.name}</CardTitle>
-                        <span className="text-xs text-blue-600 font-mono">
+                        <span className="text-xs text-primary-600 font-mono">
                           /chat/{bot.organization_slug || "toko"}/{bot.slug}
                         </span>
                       </div>
@@ -200,7 +200,7 @@ export default function DashboardPage() {
                 <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-2">
                   <button
                     onClick={() => handleCopyLink(bot.slug, bot.organization_slug || undefined)}
-                    className="inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-blue-600 font-medium py-1 px-2 rounded hover:bg-white transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-primary-600 font-medium py-1 px-2 rounded hover:bg-white transition-colors"
                     title="Salin Tautan Publik"
                   >
                     {copiedSlug === bot.slug ? (
@@ -240,8 +240,8 @@ export default function DashboardPage() {
       </div>
 
       {/* Feature roadmap note */}
-      <div className="rounded-xl p-4 bg-blue-50/60 border border-blue-200/60 text-xs text-blue-800 flex items-start gap-3">
-        <HelpCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+      <div className="rounded-xl p-4 bg-primary-50/60 border border-primary-200/60 text-xs text-primary-800 flex items-start gap-3">
+        <HelpCircle className="w-5 h-5 text-primary-600 shrink-0 mt-0.5" />
         <div>
           <strong className="font-semibold">Catatan Tahap Pengembangan (MVP Foundation):</strong>
           <p className="mt-0.5 leading-relaxed">

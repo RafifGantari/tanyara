@@ -70,7 +70,7 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <Link href="/" className="inline-flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-sm">
+          <div className="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center text-white shadow-sm">
             <MessageSquareText className="w-6 h-6" />
           </div>
           <span className="font-extrabold text-2xl text-slate-900 tracking-tight">Tanyara</span>
@@ -143,7 +143,7 @@ export default function RegisterPage() {
 
             <div className="mt-6 text-center text-xs text-slate-500">
               Sudah memiliki akun?{" "}
-              <Link href="/login" className="font-semibold text-blue-600 hover:text-blue-700">
+              <Link href="/login" className="font-semibold text-primary-600 hover:text-primary-700">
                 Masuk ke sini
               </Link>
             </div>

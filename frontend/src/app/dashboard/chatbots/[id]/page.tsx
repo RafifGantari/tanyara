@@ -228,7 +228,7 @@ export default function ChatbotDetailPage({
             </Badge>
           </div>
           <p className="text-xs text-slate-500 font-mono mt-1">
-            Tautan Publik: <span className="text-blue-600 font-semibold">{getPublicChatPath()}</span>
+            Tautan Publik: <span className="text-primary-600 font-semibold">{getPublicChatPath()}</span>
           </p>
         </div>
 
@@ -263,7 +263,7 @@ export default function ChatbotDetailPage({
             onClick={() => setActiveTab("documents")}
             className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "documents"
-                ? "border-blue-600 text-blue-600 font-semibold"
+                ? "border-primary-600 text-primary-600 font-semibold"
                 : "border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
             }`}
           >
@@ -273,7 +273,7 @@ export default function ChatbotDetailPage({
             onClick={() => setActiveTab("test")}
             className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "test"
-                ? "border-blue-600 text-blue-600 font-semibold"
+                ? "border-primary-600 text-primary-600 font-semibold"
                 : "border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
             }`}
           >
@@ -283,7 +283,7 @@ export default function ChatbotDetailPage({
             onClick={() => setActiveTab("stats")}
             className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "stats"
-                ? "border-blue-600 text-blue-600 font-semibold"
+                ? "border-primary-600 text-primary-600 font-semibold"
                 : "border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
             }`}
           >
@@ -311,7 +311,7 @@ export default function ChatbotDetailPage({
                   <Card key={doc.id}>
                     <CardContent className="p-4 flex items-center justify-between gap-4">
                       <div className="flex items-start gap-3 flex-1 min-w-0">
-                        <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs uppercase shrink-0 mt-0.5">
+                        <div className="w-10 h-10 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center font-bold text-xs uppercase shrink-0 mt-0.5">
                           {doc.name.split(".").pop() || "DOC"}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -356,7 +356,7 @@ export default function ChatbotDetailPage({
             <Card>
               <CardHeader>
                 <CardTitle className="text-sm font-bold flex items-center gap-2">
-                  <Upload className="w-4 h-4 text-blue-600" />
+                  <Upload className="w-4 h-4 text-primary-600" />
                   Unggah Dokumen Baru
                 </CardTitle>
                 <CardDescription>
@@ -387,7 +387,7 @@ export default function ChatbotDetailPage({
                       accept=".pdf,.docx,.txt"
                       className="hidden"
                     />
-                    <FileText className="w-8 h-8 text-blue-500 mx-auto mb-2" />
+                    <FileText className="w-8 h-8 text-primary-500 mx-auto mb-2" />
                     {selectedFile ? (
                       <div>
                         <span className="text-xs font-semibold text-slate-800 block truncate max-w-[200px] mx-auto">
@@ -429,7 +429,7 @@ export default function ChatbotDetailPage({
         <Card className="max-w-2xl mx-auto flex flex-col h-[520px]">
           <CardHeader className="py-3 px-5 border-b border-slate-100 flex flex-row items-center justify-between">
             <div className="flex items-center gap-2">
-              <Bot className="w-4 h-4 text-blue-600" />
+              <Bot className="w-4 h-4 text-primary-600" />
               <CardTitle className="text-sm font-bold">Simulator Tanya Jawab Asisten</CardTitle>
             </div>
             <span className="text-xs text-slate-400 font-mono">Mode Playground</span>
@@ -442,14 +442,14 @@ export default function ChatbotDetailPage({
                 className={`flex gap-2.5 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 {msg.role === "assistant" && (
-                  <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                  <div className="w-7 h-7 rounded-full bg-primary-600 text-primary-foreground flex items-center justify-center text-xs font-bold shrink-0">
                     AI
                   </div>
                 )}
                 <div
                   className={`p-3 rounded-xl text-sm max-w-[80%] ${
                     msg.role === "user"
-                      ? "bg-blue-600 text-white rounded-tr-none"
+                      ? "bg-primary-600 text-primary-foreground rounded-tr-none"
                       : "bg-white border border-slate-200 text-slate-800 rounded-tl-none shadow-sm"
                   }`}
                 >
@@ -464,11 +464,11 @@ export default function ChatbotDetailPage({
             ))}
             {testLoading && (
               <div className="flex gap-2.5">
-                <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                <div className="w-7 h-7 rounded-full bg-primary-600 text-primary-foreground flex items-center justify-center text-xs font-bold shrink-0">
                   AI
                 </div>
                 <div className="bg-white border border-slate-200 rounded-xl rounded-tl-none p-3 text-xs text-slate-400 flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
                   Sedang memproses jawaban berdasarkan dokumen...
                 </div>
               </div>

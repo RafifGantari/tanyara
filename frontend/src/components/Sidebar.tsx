@@ -50,14 +50,14 @@ export function Sidebar() {
     <aside className="w-64 border-r border-slate-200 bg-white flex flex-col h-screen sticky top-0">
       <div className="p-6 border-b border-slate-100 flex items-center justify-between">
         <Link href="/dashboard" className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-sm">
+          <div className="w-9 h-9 rounded-lg bg-primary-600 flex items-center justify-center text-white shadow-sm">
             <MessageSquareText className="w-5 h-5" />
           </div>
           <div className="flex flex-col">
             <span className="font-bold text-lg text-slate-900 tracking-tight leading-tight">
               Tanyara
             </span>
-            <span className="text-[10px] text-blue-600 font-semibold tracking-wider uppercase">
+            <span className="text-[10px] text-primary-600 font-semibold tracking-wider uppercase">
               Dashboard
             </span>
           </div>
@@ -82,11 +82,11 @@ export function Sidebar() {
               className={cn(
                 "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                 isActive
-                  ? "bg-blue-50 text-blue-700 font-semibold"
+                  ? "bg-primary-50 text-primary-700 font-semibold"
                   : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
               )}
             >
-              <item.icon className={cn("w-4 h-4", isActive ? "text-blue-600" : "text-slate-400")} />
+              <item.icon className={cn("w-4 h-4", isActive ? "text-primary-600" : "text-slate-400")} />
               {item.name}
             </Link>
           );

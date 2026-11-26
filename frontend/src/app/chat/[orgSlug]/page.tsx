@@ -21,10 +21,10 @@ import { ChatbotPublic, ChatMessage } from "@/types";
 export default function PublicChatPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ orgSlug: string }>;
 }) {
-  const resolvedParams = use(params);
-  const slug = resolvedParams.slug;
+  // A one-segment URL still carries the legacy chatbot slug.
+  const { orgSlug: slug } = use(params);
 
   const [chatbot, setChatbot] = useState<ChatbotPublic | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -100,7 +100,7 @@ export default function PublicChatPage({
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="text-center space-y-3">
-          <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="w-10 h-10 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-sm font-medium text-slate-600">Menghubungkan ke asisten AI...</p>
         </div>
       </div>
@@ -137,7 +137,7 @@ export default function PublicChatPage({
         {/* Header */}
         <header className="px-5 py-3.5 bg-white border-b border-slate-200 flex items-center justify-between sticky top-0 z-10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-sm font-bold text-base">
+            <div className="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white shadow-sm font-bold text-base">
               <Bot className="w-5 h-5" />
             </div>
             <div>
@@ -152,7 +152,7 @@ export default function PublicChatPage({
           </div>
 
           <div className="hidden sm:flex items-center gap-1.5 text-[11px] text-slate-400 font-medium">
-            <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+            <ShieldCheck className="w-3.5 h-3.5 text-primary-600" />
             <span>Didukung Tanyara AI</span>
           </div>
         </header>
@@ -172,21 +172,21 @@ export default function PublicChatPage({
               className={`flex items-end gap-2.5 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
               {msg.role === "assistant" && (
-                <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mb-1">
+                <div className="w-7 h-7 rounded-full bg-primary-600 text-primary-foreground flex items-center justify-center text-xs font-bold shrink-0 mb-1">
                   AI
                 </div>
               )}
               <div
                 className={`p-3.5 rounded-2xl text-sm leading-relaxed max-w-[85%] sm:max-w-[75%] shadow-sm ${
                   msg.role === "user"
-                    ? "bg-blue-600 text-white rounded-br-none"
+                    ? "bg-primary-600 text-primary-foreground rounded-br-none"
                     : "bg-white border border-slate-200/80 text-slate-800 rounded-bl-none"
                 }`}
               >
                 <p className="whitespace-pre-wrap">{msg.content}</p>
                 {msg.sources && msg.sources.length > 0 && (
                   <div className="mt-2 pt-2 border-t border-slate-100 text-[11px] text-slate-400 flex items-center gap-1.5">
-                    <Sparkles className="w-3 h-3 text-blue-500" />
+                    <Sparkles className="w-3 h-3 text-primary-500" />
                     <span>Sumber: {msg.sources.join(", ")}</span>
                   </div>
                 )}
@@ -196,11 +196,11 @@ export default function PublicChatPage({
 
           {sending && (
             <div className="flex items-end gap-2.5 justify-start">
-              <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mb-1">
+              <div className="w-7 h-7 rounded-full bg-primary-600 text-primary-foreground flex items-center justify-center text-xs font-bold shrink-0 mb-1">
                 AI
               </div>
               <div className="bg-white border border-slate-200/80 rounded-2xl rounded-bl-none p-3.5 text-xs text-slate-500 shadow-sm flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
+                <span className="w-2 h-2 rounded-full bg-primary-500 animate-ping" />
                 <span>Asisten sedang menganalisis dokumen dan mengetik balasan...</span>
               </div>
             </div>
@@ -234,7 +234,7 @@ export default function PublicChatPage({
 
           <div className="mt-2 text-center text-[10px] text-slate-400">
             Didukung oleh{" "}
-            <Link href="/" target="_blank" className="font-semibold text-slate-500 hover:text-blue-600">
+            <Link href="/" target="_blank" className="font-semibold text-slate-500 hover:text-primary-600">
               Tanyara
             </Link>{" "}
             • Platform Chatbot AI UMKM Indonesia

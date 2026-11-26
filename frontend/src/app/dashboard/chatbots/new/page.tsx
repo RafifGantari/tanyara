@@ -69,7 +69,7 @@ export default function NewChatbotPage() {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-primary-100 text-primary-600 flex items-center justify-center">
               <Bot className="w-5 h-5" />
             </div>
             <div>
@@ -113,7 +113,7 @@ export default function NewChatbotPage() {
                 Deskripsi Singkat (Opsional)
               </label>
               <textarea
-                className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
                 rows={2}
                 placeholder="Penjelasan singkat tujuan chatbot ini..."
                 value={description}
@@ -126,7 +126,7 @@ export default function NewChatbotPage() {
                 Pesan Sambutan Awal (Welcome Message)
               </label>
               <textarea
-                className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
                 rows={2}
                 required
                 value={welcomeMessage}
@@ -140,7 +140,7 @@ export default function NewChatbotPage() {
                 Instruksi Sistem (System Prompt)
               </label>
               <textarea
-                className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
                 rows={3}
                 value={systemPrompt}
                 onChange={(e) => setSystemPrompt(e.target.value)}

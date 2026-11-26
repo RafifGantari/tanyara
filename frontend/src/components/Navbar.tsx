@@ -1,48 +1,30 @@
-import React from "react";
 import Link from "next/link";
-import { MessageSquareText } from "lucide-react";
-import { Button } from "./ui/Button";
+import { Logo } from "./landing/Brand";
+
+const links = [
+  { href: "#produk", label: "Contoh chat" },
+  { href: "#cara-kerja", label: "Cara kerja" },
+  { href: "#pertanyaan", label: "FAQ" },
+];
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-sm">
-            <MessageSquareText className="w-5 h-5" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-lg text-slate-900 tracking-tight leading-tight">
-              Tanyara
-            </span>
-            <span className="text-[10px] text-blue-600 font-semibold tracking-wider uppercase">
-              Asisten AI Bisnis
-            </span>
-          </div>
+    <header className="nav lp-nav">
+      <div className="wrap lp-wrap lp-nav__inner">
+        <Link href="/" className="nav__logo lp-wordmark" aria-label="TanyaRa, beranda">
+          <Logo />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
-          <Link href="#fitur" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-            Fitur
-          </Link>
-          <Link href="#cara-kerja" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-            Cara Kerja
-          </Link>
-          <Link href="#keamanan" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-            Keamanan
-          </Link>
+        <nav className="lp-nav__links" aria-label="Navigasi utama">
+          {links.map((link) => (
+            <a key={link.href} href={link.href}>{link.label}</a>
+          ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <Link href="/login">
-            <Button variant="ghost" size="sm">
-              Masuk
-            </Button>
-          </Link>
-          <Link href="/register">
-            <Button variant="primary" size="sm">
-              Mulai Gratis
-            </Button>
+        <div className="nav__actions lp-nav__actions">
+          <Link href="/login" className="lp-nav__signin">Masuk</Link>
+          <Link href="/register" className="lp-button lp-button--primary lp-button--small">
+            Buat chatbot
           </Link>
         </div>
       </div>
