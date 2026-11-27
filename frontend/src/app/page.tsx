@@ -47,7 +47,7 @@ const faqs = [
   {
     id: "keamanan",
     question: "Dokumen mana yang dibaca chatbot?",
-    answer: "TanyaRa mengambil informasi dari dokumen milik chatbot yang sedang ditanya. Pelanggan bisa melihat jawaban dan nama berkas sumber yang dipakai.",
+    answer: "TanyaRa mengambil informasi dari dokumen yang Anda unggah ke chatbot tersebut.",
   },
 ];
 

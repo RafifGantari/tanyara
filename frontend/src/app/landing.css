@@ -206,10 +206,19 @@
 .lp-demo {
   min-width: 0;
   scroll-margin-top: 16px;
+}
+
+.lp-demo__frame {
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--sheet);
   overflow: hidden;
+}
+
+.lp-demo__description {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .lp-demo__header {
@@ -283,7 +292,7 @@
 }
 
 .lp-conversation {
-  min-height: 208px;
+  min-height: 160px;
   padding: 22px;
   background-color: var(--surface-subtle);
 }
@@ -322,64 +331,6 @@
   color: var(--muted);
   font-size: 12px;
   font-weight: 600;
-}
-
-.lp-citation,
-.lp-conversation__notice {
-  margin-top: 8px;
-  font-size: 12px;
-}
-
-.lp-citation summary {
-  display: flex;
-  width: fit-content;
-  max-width: 100%;
-  min-height: 44px;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 8px;
-  border-radius: 5px;
-  color: var(--primary-active);
-  font-weight: 500;
-  list-style: none;
-  transition: background-color 180ms;
-}
-
-.lp-citation summary::-webkit-details-marker {
-  display: none;
-}
-
-.lp-citation summary:hover {
-  background: #e8f0fe;
-}
-
-.lp-citation summary svg {
-  flex-shrink: 0;
-}
-
-.lp-citation__chevron {
-  margin-inline-start: 2px;
-  transition: transform 180ms;
-}
-
-.lp-citation[open] .lp-citation__chevron {
-  transform: rotate(180deg);
-}
-
-.lp-citation blockquote {
-  margin: 0 0 4px 8px;
-  padding: 3px 10px;
-  border-inline-start: 2px solid var(--success);
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.lp-conversation__notice {
-  width: fit-content;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background: var(--warning-soft);
-  color: var(--warning-ink);
 }
 
 .lp-work {
