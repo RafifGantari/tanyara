@@ -1,32 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown, FileText } from "lucide-react";
 
 const examples = [
   {
     label: "Jam buka",
     question: "Besok buka jam berapa?",
     answer: "Kedai buka pukul 08.00–21.00 setiap hari.",
-    source: "hours",
+    quote: "Setiap hari, pukul 08.00–21.00.",
   },
   {
     label: "Pilihan gula",
     question: "Kopi susu gulanya bisa dikurangi?",
     answer: "Bisa. Minta gula setengah atau tanpa gula saat memesan kopi susu.",
-    source: "sugar",
+    quote: "Kopi susu tersedia dengan gula normal, setengah, atau tanpa gula.",
   },
   {
     label: "Parkir",
     question: "Ada tempat parkir mobil?",
-    answer: "Informasi parkir mobil belum ada di dokumen kedai. Silakan tanyakan langsung ke staf kedai.",
-    source: null,
+    answer: "Untuk parkir mobil, silakan tanyakan langsung ke staf kedai.",
+    quote: null,
   },
-] as const;
-
-const notes = [
-  { id: "hours", title: "Jam buka", text: "Setiap hari, pukul 08.00–21.00." },
-  { id: "sugar", title: "Kopi susu", text: "Pilihan gula: normal, setengah, atau tanpa gula." },
-  { id: "order", title: "Pemesanan", text: "Pesan langsung di kasir kedai." },
 ] as const;
 
 export function ChatDemo() {
@@ -40,8 +35,33 @@ export function ChatDemo() {
         <span>Simulasi</span>
       </header>
 
+      <div className="lp-conversation" aria-live="polite" aria-atomic="true">
+        <div className="lp-conversation__messages" key={selected}>
+          <p className="lp-conversation__question">
+            <span className="sr-only">Pelanggan </span>
+            {example.question}
+          </p>
+          <div className="lp-conversation__reply">
+            <div className="lp-conversation__sender">Kedai Sore</div>
+            <p>{example.answer}</p>
+            {example.quote ? (
+              <details className="lp-citation">
+                <summary>
+                  <FileText aria-hidden="true" size={15} />
+                  <span><span className="sr-only">Lihat kutipan dari </span>FAQ Kedai Sore.txt</span>
+                  <ChevronDown aria-hidden="true" size={15} className="lp-citation__chevron" />
+                </summary>
+                <blockquote>{example.quote}</blockquote>
+              </details>
+            ) : (
+              <p className="lp-conversation__notice">Informasi parkir belum tercantum di FAQ</p>
+            )}
+          </div>
+        </div>
+      </div>
+
       <div className="lp-questions">
-        <span id="demo-questions">Pilih pertanyaan</span>
+        <span id="demo-questions">Coba pertanyaan</span>
         <div role="group" aria-labelledby="demo-questions">
           {examples.map(({ label }, index) => (
             <button
@@ -54,40 +74,6 @@ export function ChatDemo() {
             </button>
           ))}
         </div>
-      </div>
-
-      <div className="lp-demo__stage">
-        <article className="lp-reply" aria-live="polite" aria-atomic="true">
-          <div key={selected} className="lp-reply__content">
-            <p className="lp-reply__question">{example.question}</p>
-            <p className="lp-reply__answer">{example.answer}</p>
-            <span className="lp-reply__source" data-match={Boolean(example.source)}>
-              {example.source ? "Sumber: FAQ Kedai Sore.txt" : "Tidak ada kutipan yang cocok"}
-            </span>
-          </div>
-        </article>
-
-        <article className="lp-source" aria-label="Isi dokumen contoh">
-          <div className="lp-source__heading">
-            <span>Dokumen contoh</span>
-            <h3>FAQ Kedai Sore.txt</h3>
-          </div>
-          <dl>
-            {notes.map((note) => (
-              <div key={note.id} className={example.source === note.id ? "lp-source__match" : undefined}>
-                <dt>{note.title}</dt>
-                <dd>{note.text}</dd>
-              </div>
-            ))}
-          </dl>
-        </article>
-
-        <span
-          key={selected}
-          className="lp-demo__transfer"
-          data-match={Boolean(example.source)}
-          aria-hidden="true"
-        />
       </div>
     </section>
   );
