@@ -199,7 +199,7 @@ export default function ChatbotDetailPage({
   if (!chatbot) {
     return (
       <div className="p-12 text-center">
-        <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-3" />
+        <AlertCircle className="w-12 h-12 text-danger mx-auto mb-3" />
         <h3 className="text-lg font-bold text-slate-900">Chatbot Tidak Ditemukan</h3>
         <p className="text-sm text-slate-500 mt-1">Chatbot mungkin sudah dihapus atau tidak berada di organisasi ini.</p>
         <Link href="/dashboard" className="mt-4 inline-block">
@@ -228,7 +228,7 @@ export default function ChatbotDetailPage({
             </Badge>
           </div>
           <p className="text-xs text-slate-500 font-mono mt-1">
-            Tautan Publik: <span className="text-blue-600 font-semibold">{getPublicChatPath()}</span>
+            Tautan Publik: <span className="text-primary-600 font-semibold">{getPublicChatPath()}</span>
           </p>
         </div>
 
@@ -236,7 +236,7 @@ export default function ChatbotDetailPage({
           <Button variant="outline" size="sm" onClick={handleCopyLink}>
             {copied ? (
               <>
-                <Check className="w-4 h-4 text-emerald-600 mr-1.5" />
+                <Check className="w-4 h-4 text-success-ink mr-1.5" />
                 <span>Tersalin!</span>
               </>
             ) : (
@@ -263,7 +263,7 @@ export default function ChatbotDetailPage({
             onClick={() => setActiveTab("documents")}
             className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "documents"
-                ? "border-blue-600 text-blue-600 font-semibold"
+                ? "border-primary-600 text-primary-600 font-semibold"
                 : "border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
             }`}
           >
@@ -273,7 +273,7 @@ export default function ChatbotDetailPage({
             onClick={() => setActiveTab("test")}
             className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "test"
-                ? "border-blue-600 text-blue-600 font-semibold"
+                ? "border-primary-600 text-primary-600 font-semibold"
                 : "border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
             }`}
           >
@@ -283,7 +283,7 @@ export default function ChatbotDetailPage({
             onClick={() => setActiveTab("stats")}
             className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "stats"
-                ? "border-blue-600 text-blue-600 font-semibold"
+                ? "border-primary-600 text-primary-600 font-semibold"
                 : "border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
             }`}
           >
@@ -311,7 +311,7 @@ export default function ChatbotDetailPage({
                   <Card key={doc.id}>
                     <CardContent className="p-4 flex items-center justify-between gap-4">
                       <div className="flex items-start gap-3 flex-1 min-w-0">
-                        <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs uppercase shrink-0 mt-0.5">
+                        <div className="w-10 h-10 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center font-bold text-xs uppercase shrink-0 mt-0.5">
                           {doc.name.split(".").pop() || "DOC"}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -322,8 +322,8 @@ export default function ChatbotDetailPage({
                             <span>{doc.chunk_count} Bagian teks</span>
                           </div>
                           {doc.status === "failed" && (
-                            <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded-md text-xs text-red-700 flex items-start gap-1.5">
-                              <AlertCircle className="w-3.5 h-3.5 text-red-600 shrink-0 mt-0.5" />
+                            <div className="mt-2 p-2 bg-danger-soft border border-danger-border rounded-md text-xs text-danger-ink flex items-start gap-1.5">
+                              <AlertCircle className="w-3.5 h-3.5 text-danger-ink shrink-0 mt-0.5" />
                               <span>
                                 <strong>Alasan Gagal:</strong>{" "}
                                 {doc.error_message || "Gagal menghasilkan representasi vektor dokumen. Pastikan kuota dan API key Gemini valid."}
@@ -339,7 +339,7 @@ export default function ChatbotDetailPage({
                         <button
                           onClick={() => handleDeleteDocument(doc.id, doc.name)}
                           disabled={deletingDocId === doc.id}
-                          className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors disabled:opacity-50"
+                          className="p-1.5 text-slate-400 hover:text-danger-ink hover:bg-danger-soft rounded-md transition-colors disabled:opacity-50"
                           title="Hapus Dokumen"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -356,7 +356,7 @@ export default function ChatbotDetailPage({
             <Card>
               <CardHeader>
                 <CardTitle className="text-sm font-bold flex items-center gap-2">
-                  <Upload className="w-4 h-4 text-blue-600" />
+                  <Upload className="w-4 h-4 text-primary-600" />
                   Unggah Dokumen Baru
                 </CardTitle>
                 <CardDescription>
@@ -365,12 +365,12 @@ export default function ChatbotDetailPage({
               </CardHeader>
               <CardContent>
                 {uploadMessage && (
-                  <div className="mb-4 p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs">
+                  <div className="mb-4 p-2.5 rounded-lg bg-success-soft border border-success-border text-success-ink text-xs">
                     {uploadMessage}
                   </div>
                 )}
                 {uploadError && (
-                  <div className="mb-4 p-2.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-1.5">
+                  <div className="mb-4 p-2.5 rounded-lg bg-danger-soft border border-danger-border text-danger-ink text-xs flex items-center gap-1.5">
                     <AlertCircle className="w-4 h-4 shrink-0" />
                     <span>{uploadError}</span>
                   </div>
@@ -387,7 +387,7 @@ export default function ChatbotDetailPage({
                       accept=".pdf,.docx,.txt"
                       className="hidden"
                     />
-                    <FileText className="w-8 h-8 text-blue-500 mx-auto mb-2" />
+                    <FileText className="w-8 h-8 text-primary-500 mx-auto mb-2" />
                     {selectedFile ? (
                       <div>
                         <span className="text-xs font-semibold text-slate-800 block truncate max-w-[200px] mx-auto">
@@ -429,7 +429,7 @@ export default function ChatbotDetailPage({
         <Card className="max-w-2xl mx-auto flex flex-col h-[520px]">
           <CardHeader className="py-3 px-5 border-b border-slate-100 flex flex-row items-center justify-between">
             <div className="flex items-center gap-2">
-              <Bot className="w-4 h-4 text-blue-600" />
+              <Bot className="w-4 h-4 text-primary-600" />
               <CardTitle className="text-sm font-bold">Simulator Tanya Jawab Asisten</CardTitle>
             </div>
             <span className="text-xs text-slate-400 font-mono">Mode Playground</span>
@@ -442,14 +442,14 @@ export default function ChatbotDetailPage({
                 className={`flex gap-2.5 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 {msg.role === "assistant" && (
-                  <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                  <div className="w-7 h-7 rounded-full bg-primary-600 text-primary-foreground flex items-center justify-center text-xs font-bold shrink-0">
                     AI
                   </div>
                 )}
                 <div
                   className={`p-3 rounded-xl text-sm max-w-[80%] ${
                     msg.role === "user"
-                      ? "bg-blue-600 text-white rounded-tr-none"
+                      ? "bg-primary-600 text-primary-foreground rounded-tr-none"
                       : "bg-white border border-slate-200 text-slate-800 rounded-tl-none shadow-sm"
                   }`}
                 >
@@ -464,11 +464,11 @@ export default function ChatbotDetailPage({
             ))}
             {testLoading && (
               <div className="flex gap-2.5">
-                <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                <div className="w-7 h-7 rounded-full bg-primary-600 text-primary-foreground flex items-center justify-center text-xs font-bold shrink-0">
                   AI
                 </div>
                 <div className="bg-white border border-slate-200 rounded-xl rounded-tl-none p-3 text-xs text-slate-400 flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
                   Sedang memproses jawaban berdasarkan dokumen...
                 </div>
               </div>
@@ -497,7 +497,7 @@ export default function ChatbotDetailPage({
               <CardContent className="p-5">
                 <span className="text-xs font-medium text-slate-400 uppercase">Total Pertanyaan</span>
                 <p className="text-2xl font-bold text-slate-900 mt-1">{chatbot.conversation_count || 0}</p>
-                <span className="text-xs text-emerald-600 font-medium">Percakapan masuk</span>
+                <span className="text-xs text-success-ink font-medium">Percakapan masuk</span>
               </CardContent>
             </Card>
             <Card>

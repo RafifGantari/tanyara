@@ -100,7 +100,7 @@ export default function StorePublicChatPage({
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="text-center space-y-3">
-          <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="w-10 h-10 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-sm font-medium text-slate-600">Menghubungkan ke asisten AI toko...</p>
         </div>
       </div>
@@ -111,7 +111,7 @@ export default function StorePublicChatPage({
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="max-w-md w-full text-center bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto">
+          <div className="w-12 h-12 rounded-full bg-warning-soft text-warning-ink flex items-center justify-center mx-auto">
             <AlertCircle className="w-6 h-6" />
           </div>
           <h2 className="text-xl font-bold text-slate-900">Chatbot Tidak Tersedia</h2>
@@ -136,7 +136,7 @@ export default function StorePublicChatPage({
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10 shadow-xs">
         <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-xs">
+            <div className="w-10 h-10 rounded-xl bg-primary-600 text-primary-foreground flex items-center justify-center shadow-xs">
               <Bot className="w-5 h-5" />
             </div>
             <div>
@@ -155,7 +155,7 @@ export default function StorePublicChatPage({
 
           <div className="flex items-center gap-2">
             <div className="hidden sm:flex items-center gap-1 text-[11px] text-slate-600 bg-slate-50 px-2.5 py-1 rounded-full border border-slate-200">
-              <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+              <ShieldCheck className="w-3.5 h-3.5 text-primary-600" />
               <span>Didukung Dokumen Resmi</span>
             </div>
           </div>
@@ -181,7 +181,7 @@ export default function StorePublicChatPage({
                 className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold ${
                   isUser
                     ? "bg-slate-800 text-white"
-                    : "bg-blue-600 text-white"
+                    : "bg-primary-600 text-primary-foreground"
                 }`}
               >
                 {isUser ? "Anda" : <Bot className="w-4 h-4" />}
@@ -190,7 +190,7 @@ export default function StorePublicChatPage({
               <div
                 className={`max-w-[80%] rounded-2xl p-4 text-sm leading-relaxed shadow-2xs ${
                   isUser
-                    ? "bg-blue-600 text-white rounded-tr-xs"
+                    ? "bg-primary-600 text-primary-foreground rounded-tr-xs"
                     : "bg-white text-slate-800 border border-slate-200 rounded-tl-xs"
                 }`}
               >
@@ -213,13 +213,13 @@ export default function StorePublicChatPage({
 
         {sending && (
           <div className="flex items-start gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 rounded-full bg-primary-600 text-primary-foreground flex items-center justify-center shrink-0">
               <Bot className="w-4 h-4" />
             </div>
             <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-xs p-4 shadow-2xs flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-blue-600 animate-bounce" />
-              <div className="w-2 h-2 rounded-full bg-blue-600 animate-bounce [animation-delay:0.2s]" />
-              <div className="w-2 h-2 rounded-full bg-blue-600 animate-bounce [animation-delay:0.4s]" />
+              <div className="w-2 h-2 rounded-full bg-primary-600 animate-bounce" />
+              <div className="w-2 h-2 rounded-full bg-primary-600 animate-bounce [animation-delay:0.2s]" />
+              <div className="w-2 h-2 rounded-full bg-primary-600 animate-bounce [animation-delay:0.4s]" />
               <span className="text-xs text-slate-400 ml-1">Mencari informasi dokumen...</span>
             </div>
           </div>
@@ -250,7 +250,7 @@ export default function StorePublicChatPage({
         </form>
         <div className="max-w-3xl mx-auto mt-2 text-center text-[11px] text-slate-400">
           Didukung oleh{" "}
-          <Link href="/" className="font-semibold text-slate-600 hover:text-blue-600">
+          <Link href="/" className="font-semibold text-slate-600 hover:text-primary-600">
             Tanyara
           </Link>{" "}
           • AI Asisten Khusus Bisnis & UMKM Indonesia

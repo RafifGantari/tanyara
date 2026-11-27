@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { MessageSquareText, Lock, Mail, ArrowRight, AlertCircle } from "lucide-react";
+import { Lock, Mail, ArrowRight, AlertCircle } from "lucide-react";
+import { Logo } from "@/components/Brand";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
@@ -52,11 +53,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <Link href="/" className="inline-flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-sm">
-            <MessageSquareText className="w-6 h-6" />
-          </div>
-          <span className="font-extrabold text-2xl text-slate-900 tracking-tight">Tanyara</span>
+        <Link href="/" className="inline-flex items-center" aria-label="TanyaRa, beranda">
+          <Logo className="h-auto w-40" />
         </Link>
         <h2 className="mt-4 text-2xl font-bold text-slate-900">Masuk ke Dashboard</h2>
         <p className="mt-1 text-sm text-slate-600">
@@ -68,8 +66,8 @@ export default function LoginPage() {
         <Card className="shadow-lg">
           <CardContent className="pt-6">
             {!isSupabaseConfigured && (
-              <div className="mb-4 p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs flex items-start gap-2">
-                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <div className="mb-4 p-3 rounded-lg bg-warning-soft border border-warning-border text-warning-ink text-xs flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 text-warning-ink shrink-0 mt-0.5" />
                 <div>
                   <strong>Mode Simulasi Lokal:</strong> Kredensial Supabase belum diisi di <code>.env</code>. Anda dapat langsung mengklik Masuk untuk menjelajahi dashboard.
                 </div>
@@ -77,7 +75,7 @@ export default function LoginPage() {
             )}
 
             {errorMsg && (
-              <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+              <div className="mb-4 p-3 rounded-lg bg-danger-soft border border-danger-border text-danger-ink text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{errorMsg}</span>
               </div>
@@ -110,7 +108,7 @@ export default function LoginPage() {
 
             <div className="mt-6 text-center text-xs text-slate-500">
               Belum memiliki akun bisnis?{" "}
-              <Link href="/register" className="font-semibold text-blue-600 hover:text-blue-700">
+              <Link href="/register" className="font-semibold text-primary-600 hover:text-primary-700">
                 Daftar sekarang
               </Link>
             </div>

@@ -56,7 +56,7 @@ export default function DashboardLayout({
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center space-y-2">
-          <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-xs text-slate-500 font-medium">Memverifikasi sesi login...</p>
         </div>
       </div>
@@ -68,7 +68,7 @@ export default function DashboardLayout({
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0">
         {!isSupabaseConfigured && (
-          <div className="bg-amber-500 text-amber-950 text-xs px-4 py-1.5 text-center font-medium border-b border-amber-600/20">
+          <div className="bg-warning text-foreground text-xs px-4 py-1.5 text-center font-medium border-b border-warning-border">
             Mode Pengembangan Offline: Kredensial Supabase belum dikonfigurasi di <code>.env.local</code>. Menampilkan data lokal.
           </div>
         )}
