@@ -199,7 +199,7 @@ export default function ChatbotDetailPage({
   if (!chatbot) {
     return (
       <div className="p-12 text-center">
-        <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-3" />
+        <AlertCircle className="w-12 h-12 text-danger mx-auto mb-3" />
         <h3 className="text-lg font-bold text-slate-900">Chatbot Tidak Ditemukan</h3>
         <p className="text-sm text-slate-500 mt-1">Chatbot mungkin sudah dihapus atau tidak berada di organisasi ini.</p>
         <Link href="/dashboard" className="mt-4 inline-block">
@@ -236,7 +236,7 @@ export default function ChatbotDetailPage({
           <Button variant="outline" size="sm" onClick={handleCopyLink}>
             {copied ? (
               <>
-                <Check className="w-4 h-4 text-emerald-600 mr-1.5" />
+                <Check className="w-4 h-4 text-success-ink mr-1.5" />
                 <span>Tersalin!</span>
               </>
             ) : (
@@ -322,8 +322,8 @@ export default function ChatbotDetailPage({
                             <span>{doc.chunk_count} Bagian teks</span>
                           </div>
                           {doc.status === "failed" && (
-                            <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded-md text-xs text-red-700 flex items-start gap-1.5">
-                              <AlertCircle className="w-3.5 h-3.5 text-red-600 shrink-0 mt-0.5" />
+                            <div className="mt-2 p-2 bg-danger-soft border border-danger-border rounded-md text-xs text-danger-ink flex items-start gap-1.5">
+                              <AlertCircle className="w-3.5 h-3.5 text-danger-ink shrink-0 mt-0.5" />
                               <span>
                                 <strong>Alasan Gagal:</strong>{" "}
                                 {doc.error_message || "Gagal menghasilkan representasi vektor dokumen. Pastikan kuota dan API key Gemini valid."}
@@ -339,7 +339,7 @@ export default function ChatbotDetailPage({
                         <button
                           onClick={() => handleDeleteDocument(doc.id, doc.name)}
                           disabled={deletingDocId === doc.id}
-                          className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors disabled:opacity-50"
+                          className="p-1.5 text-slate-400 hover:text-danger-ink hover:bg-danger-soft rounded-md transition-colors disabled:opacity-50"
                           title="Hapus Dokumen"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -365,12 +365,12 @@ export default function ChatbotDetailPage({
               </CardHeader>
               <CardContent>
                 {uploadMessage && (
-                  <div className="mb-4 p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs">
+                  <div className="mb-4 p-2.5 rounded-lg bg-success-soft border border-success-border text-success-ink text-xs">
                     {uploadMessage}
                   </div>
                 )}
                 {uploadError && (
-                  <div className="mb-4 p-2.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-1.5">
+                  <div className="mb-4 p-2.5 rounded-lg bg-danger-soft border border-danger-border text-danger-ink text-xs flex items-center gap-1.5">
                     <AlertCircle className="w-4 h-4 shrink-0" />
                     <span>{uploadError}</span>
                   </div>
@@ -497,7 +497,7 @@ export default function ChatbotDetailPage({
               <CardContent className="p-5">
                 <span className="text-xs font-medium text-slate-400 uppercase">Total Pertanyaan</span>
                 <p className="text-2xl font-bold text-slate-900 mt-1">{chatbot.conversation_count || 0}</p>
-                <span className="text-xs text-emerald-600 font-medium">Percakapan masuk</span>
+                <span className="text-xs text-success-ink font-medium">Percakapan masuk</span>
               </CardContent>
             </Card>
             <Card>

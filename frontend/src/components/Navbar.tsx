@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "./landing/Brand";
+import { Logo } from "./Brand";
 
 const links = [
   { href: "#produk", label: "Contoh chat" },
@@ -12,7 +12,7 @@ export function Navbar() {
     <header className="nav lp-nav">
       <div className="wrap lp-wrap lp-nav__inner">
         <Link href="/" className="nav__logo lp-wordmark" aria-label="TanyaRa, beranda">
-          <Logo />
+          <Logo className="h-auto w-[140px]" />
         </Link>
 
         <nav className="lp-nav__links" aria-label="Navigasi utama">
@@ -23,7 +23,7 @@ export function Navbar() {
 
         <div className="nav__actions lp-nav__actions">
           <Link href="/login" className="lp-nav__signin">Masuk</Link>
-          <Link href="/register" className="lp-button lp-button--primary lp-button--small">
+          <Link href="/register" className="lp-button primary-action lp-button--small">
             Buat chatbot
           </Link>
         </div>

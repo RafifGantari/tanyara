@@ -111,7 +111,7 @@ export default function StorePublicChatPage({
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="max-w-md w-full text-center bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto">
+          <div className="w-12 h-12 rounded-full bg-warning-soft text-warning-ink flex items-center justify-center mx-auto">
             <AlertCircle className="w-6 h-6" />
           </div>
           <h2 className="text-xl font-bold text-slate-900">Chatbot Tidak Tersedia</h2>

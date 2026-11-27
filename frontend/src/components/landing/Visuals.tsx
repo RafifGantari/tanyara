@@ -61,7 +61,7 @@ export function ChatDemo() {
           <div key={selected} className="lp-reply__content">
             <p className="lp-reply__question">{example.question}</p>
             <p className="lp-reply__answer">{example.answer}</p>
-            <span className="lp-reply__source">
+            <span className="lp-reply__source" data-match={Boolean(example.source)}>
               {example.source ? "Sumber: FAQ Kedai Sore.txt" : "Tidak ada kutipan yang cocok"}
             </span>
           </div>

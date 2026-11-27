@@ -1,18 +1,10 @@
 import type { Metadata } from "next";
-import { Instrument_Serif } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { ChatDemo } from "@/components/landing/Visuals";
 import "./landing.css";
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-  variable: "--font-display",
-});
 
 export const metadata: Metadata = {
   title: { absolute: "TanyaRa | Chatbot dari dokumen bisnis" },
@@ -61,7 +53,7 @@ const faqs = [
 
 export default function LandingPage() {
   return (
-    <div className={`landing ${instrumentSerif.variable}`} id="top">
+    <div className="landing" id="top">
       <a className="lp-skip" href="#main">Lewati ke isi</a>
       <Navbar />
 
@@ -74,7 +66,7 @@ export default function LandingPage() {
                 Unggah katalog, menu, atau FAQ, lalu bagikan chatbot lewat satu tautan. Pelanggan bisa tanya harga, stok, atau jam buka tanpa akun.
               </p>
               <div className="btn-row lp-hero__actions">
-                <Link href="/register" className="lp-button lp-button--primary">Buat chatbot</Link>
+                <Link href="/register" className="lp-button primary-action">Buat chatbot</Link>
                 <a href="#cara-kerja" className="lp-text-link">Lihat cara kerja <span aria-hidden="true">↓</span></a>
               </div>
             </div>

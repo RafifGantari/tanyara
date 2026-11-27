@@ -111,7 +111,7 @@ export default function PublicChatPage({
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="max-w-md w-full text-center bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto">
+          <div className="w-12 h-12 rounded-full bg-warning-soft text-warning-ink flex items-center justify-center mx-auto">
             <AlertCircle className="w-6 h-6" />
           </div>
           <h2 className="text-xl font-bold text-slate-900">Chatbot Tidak Tersedia</h2>
@@ -143,7 +143,7 @@ export default function PublicChatPage({
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="font-bold text-slate-900 text-base leading-tight">{chatbot.name}</h1>
-                <span className="w-2 h-2 rounded-full bg-emerald-500" title="Online" />
+                <span className="w-2 h-2 rounded-full bg-success" title="Online" />
               </div>
               <p className="text-xs text-slate-500 leading-tight">
                 {chatbot.description || "Asisten Pintar Resmi Bisnis"}

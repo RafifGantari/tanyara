@@ -93,7 +93,7 @@ export default function DashboardPage() {
                 {chatbots.reduce((acc, curr) => acc + (curr.document_count || 0), 0)}
               </p>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-success-soft text-success-ink flex items-center justify-center">
               <FileText className="w-5 h-5" />
             </div>
           </CardContent>
@@ -117,12 +117,12 @@ export default function DashboardPage() {
           <CardContent className="p-5 flex items-center justify-between">
             <div>
               <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Status Backend</p>
-              <p className="text-sm font-semibold text-emerald-600 mt-1 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <p className="text-sm font-semibold text-success-ink mt-1 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
                 API Berjalan
               </p>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-success-soft text-success-ink flex items-center justify-center">
               <Activity className="w-5 h-5" />
             </div>
           </CardContent>
@@ -205,8 +205,8 @@ export default function DashboardPage() {
                   >
                     {copiedSlug === bot.slug ? (
                       <>
-                        <Check className="w-3.5 h-3.5 text-emerald-600" />
-                        <span className="text-emerald-600">Tersalin!</span>
+                        <Check className="w-3.5 h-3.5 text-success-ink" />
+                        <span className="text-success-ink">Tersalin!</span>
                       </>
                     ) : (
                       <>

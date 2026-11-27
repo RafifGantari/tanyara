@@ -3,12 +3,40 @@
 @tailwind utilities;
 
 :root {
-  --background: #f3f1ec;
-  --foreground: #1d2530;
-  --primary: #002040;
-  --primary-hover: #001a33;
-  --primary-active: #001326;
-  --primary-foreground: #fffdf9;
+  --background: #f8f9fa;
+  --foreground: #202124;
+  --primary: #1a73e8;
+  --primary-hover: #155fc3;
+  --primary-active: #134e9e;
+  --primary-foreground: #ffffff;
+  --danger: #ea4335;
+  --danger-soft: #fce8e6;
+  --danger-border: #f3b1ab;
+  --danger-ink: #a52714;
+  --danger-hover: #842012;
+  --warning: #fbbc05;
+  --warning-soft: #fef7e0;
+  --warning-border: #f4d47c;
+  --warning-ink: #624400;
+  --success: #34a853;
+  --success-soft: #e6f4ea;
+  --success-border: #a8dab5;
+  --success-ink: #176b35;
+}
+
+@layer components {
+  .primary-action {
+    color: var(--primary-foreground);
+    background-color: var(--primary);
+  }
+
+  .primary-action:not(:disabled):hover {
+    background-color: var(--primary-hover);
+  }
+
+  .primary-action:not(:disabled):active {
+    background-color: var(--primary-active);
+  }
 }
 
 html {

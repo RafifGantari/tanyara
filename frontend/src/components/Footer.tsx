@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "./landing/Brand";
+import { Logo } from "./Brand";
 
 export function Footer() {
   return (
@@ -17,7 +17,7 @@ export function Footer() {
       <div className="lp-footer__strip">
         <div className="wrap lp-wrap lp-footer__bottom">
           <Link href="/" className="lp-wordmark" aria-label="TanyaRa, beranda">
-            <Logo />
+            <Logo className="h-auto w-[140px]" />
           </Link>
           <nav aria-label="Navigasi footer">
             <a href="#produk">Contoh chat</a>

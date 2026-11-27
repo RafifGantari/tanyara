@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { MessageSquareText, ArrowRight, AlertCircle, CheckCircle } from "lucide-react";
+import { ArrowRight, AlertCircle, CheckCircle } from "lucide-react";
+import { Logo } from "@/components/Brand";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Card, CardContent } from "@/components/ui/Card";
@@ -69,11 +70,8 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <Link href="/" className="inline-flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center text-white shadow-sm">
-            <MessageSquareText className="w-6 h-6" />
-          </div>
-          <span className="font-extrabold text-2xl text-slate-900 tracking-tight">Tanyara</span>
+        <Link href="/" className="inline-flex items-center" aria-label="TanyaRa, beranda">
+          <Logo className="h-auto w-40" />
         </Link>
         <h2 className="mt-4 text-2xl font-bold text-slate-900">Daftarkan Bisnis Anda</h2>
         <p className="mt-1 text-sm text-slate-600">
@@ -85,8 +83,8 @@ export default function RegisterPage() {
         <Card className="shadow-lg">
           <CardContent className="pt-6">
             {!isSupabaseConfigured && (
-              <div className="mb-4 p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs flex items-start gap-2">
-                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <div className="mb-4 p-3 rounded-lg bg-warning-soft border border-warning-border text-warning-ink text-xs flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 text-warning-ink shrink-0 mt-0.5" />
                 <div>
                   <strong>Mode Simulasi Lokal:</strong> Supabase auth belum terhubung ke cloud. Pendaftaran akan langsung membuka dashboard demo.
                 </div>
@@ -94,15 +92,15 @@ export default function RegisterPage() {
             )}
 
             {errorMsg && (
-              <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-start gap-2">
+              <div className="mb-4 p-3 rounded-lg bg-danger-soft border border-danger-border text-danger-ink text-xs flex items-start gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>{errorMsg}</span>
               </div>
             )}
 
             {successMsg && (
-              <div className="mb-4 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-start gap-2">
-                <CheckCircle className="w-4 h-4 shrink-0 text-emerald-600 mt-0.5" />
+              <div className="mb-4 p-3 rounded-lg bg-success-soft border border-success-border text-success-ink text-xs flex items-start gap-2">
+                <CheckCircle className="w-4 h-4 shrink-0 text-success-ink mt-0.5" />
                 <span>{successMsg}</span>
               </div>
             )}

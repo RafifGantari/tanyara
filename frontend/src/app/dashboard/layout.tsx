@@ -68,7 +68,7 @@ export default function DashboardLayout({
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0">
         {!isSupabaseConfigured && (
-          <div className="bg-amber-500 text-amber-950 text-xs px-4 py-1.5 text-center font-medium border-b border-amber-600/20">
+          <div className="bg-warning text-foreground text-xs px-4 py-1.5 text-center font-medium border-b border-warning-border">
             Mode Pengembangan Offline: Kredensial Supabase belum dikonfigurasi di <code>.env.local</code>. Menampilkan data lokal.
           </div>
         )}

@@ -84,7 +84,7 @@ export default function NewChatbotPage() {
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-5">
             {error && (
-              <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+              <div className="p-3 rounded-lg bg-danger-soft border border-danger-border text-danger-ink text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
               </div>
